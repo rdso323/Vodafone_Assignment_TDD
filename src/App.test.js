@@ -1,8 +1,16 @@
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import React from "react";
+import { mount } from "enzyme";
+import App from "./App";
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+describe("App component snapshot testing", () => {
+  // Snapshot Testing for App component
+  test("Matches the snapshot", () => {
+    const component = mount(<App />);
+    expect(component.getElements()).toMatchSnapshot();
+  });
+
+  test("App component is displayed", () => {
+    const wrapper = mount(<App />);
+    expect(wrapper.find(App)).toHaveLength(1);
+  });
 });
